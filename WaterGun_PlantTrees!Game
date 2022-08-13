@@ -11,7 +11,7 @@ display = pygame.display.set_mode((800, 725))
 
 bg = pygame.image.load(os.getcwd() + '//Documents//game_files//bored.jpg')
 
-pygame.display.set_caption("PLANT THE TREES!")
+pygame.display.set_caption("WATER THE TREES!")
 icon = pygame.image.load(os.getcwd() + '//Documents//game_files//forest.png')
 pygame.display.set_icon(icon)
 
