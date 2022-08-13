@@ -1,0 +1,15 @@
+How to know if the information of all anime available is upto point ?
+df.isnull().sum().sort_values(ascending=False)
+
+What is the synopsis of Fullmetal Alchemist : Brotherhood?
+df['Genre'][0] 
+# Fullmetal Alchemist is in row 0
+
+How to verify all NAN values have been removed from all Anime { Accuracy prediction }
+df['Synopsis'] = df['Synopsis'].fillna(
+    df['Synopsis'].dropna().mode().values[0]
+)
+df['Anime_Rating'] = df['Anime_Rating'].fillna(
+    df['Anime_Rating'].dropna().mode().values[0]
+)
+df.isnull().sum()
