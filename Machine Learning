@@ -1,3 +1,4 @@
+#NOTE : GRAPH has not been added as the deep learning program directly runs through genre , Anime id and ratings . Representation in graphs of the following deems vague as the ML situates the algorithm
 #Importing libraries into the code
 import os
 import numpy as np
