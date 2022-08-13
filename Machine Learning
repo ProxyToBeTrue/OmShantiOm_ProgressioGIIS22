@@ -1,4 +1,4 @@
-Importing libraries into the code
+#Importing libraries into the code
 import os
 import numpy as np
 import pandas as pd
@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import warnings
 import nltk
-Using pandas to open our csv files
+#Using pandas to open our csv files
 df=pd.read_csv('Anime_Top10000.csv')
 df
 Setting the index of Anime_Name Column [ In order to justify the index of the operation ] ( This enables the code to be processed easily )
