@@ -1,0 +1,21 @@
+Category 3 :
+
+Question 1 
+Answer :
+t=int(input())
+for x in range(t):
+    n=int(input())
+    if n>0 and n<=1000:
+        print(n)
+    else:
+        print(Error)
+
+Question 2 
+Answer :
+t=int(input())
+for i in range(t):
+    x,y=map(int,raw_input().split(' '))
+    if(x>y):
+        print("A")
+    else:
+        print("B")
