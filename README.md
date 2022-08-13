@@ -1,5 +1,5 @@
 # GIIS Progressio - Om_Shanti_Om
-The code has been designed by team Om Shanti Om in cathedral to GIIS Progressio 2022!
+The code has been designed by team Om Shanti for GIIS Progressio 2022!
 
 
 
