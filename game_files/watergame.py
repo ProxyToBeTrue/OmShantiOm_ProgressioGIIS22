@@ -1,0 +1,156 @@
+import os
+import math
+import random
+import pygame
+from pygame import mixer
+
+pygame.init()
+
+display = pygame.display.set_mode((800, 725))
+
+bg = pygame.image.load(os.getcwd() + '//Documents//game_files//bored.jpg')
+
+pygame.display.set_caption("WATER THE TREES!")
+icon = pygame.image.load(os.getcwd() + '//Documents//game_files//forest.png')
+pygame.display.set_icon(icon)
+
+#gun
+gunImg = pygame.image.load(os.getcwd() + '//Documents//game_files//watergun.png')
+gunX = 370
+gunY = 480
+gunX_change = 0
+
+#tree
+treeImg = []
+treeX = []
+treeY = []
+treeX_change = []
+treeY_change = []
+num_of_trees = 6
+
+for i in range(num_of_trees):
+    treeImg.append(pygame.image.load(os.getcwd() + '//Documents//game_files//tree.png'))
+    treeX.append(random.randint(0, 650))
+    treeY.append(random.randint(50, 100))
+    treeX_change.append(4)
+    treeY_change.append(40)
+
+#water
+waterImg = pygame.image.load(os.getcwd() + '//Documents//game_files//drop.png')
+waterX = 0
+waterY = 490
+waterX_change = 0
+waterY_change = 20
+water_state = "ready"
+
+scorevalue = 0
+font = pygame.font.Font('freesansbold.ttf', 32)
+
+textX = 10
+testY = 10
+
+over_font = pygame.font.Font('freesansbold.ttf', 64)
+
+def showscore(x, y):
+    score = font.render("Score : " + str(scorevalue), True, (210, 228, 89))
+    display.blit(score, (x, y))
+
+def gotext():
+    over_text = over_font.render("GAME OVER", True, (210, 228, 89))
+    display.blit(over_text, (200, 250))
+
+def gun(x, y):
+    display.blit(gunImg, (x, y))
+
+def tree(x, y, i):
+    display.blit(treeImg[i], (x, y))
+
+def fwater(x, y):
+    global water_state
+    water_state = "fire"
+    display.blit(waterImg, (x + 16, y + 10))
+
+def iscontact(treeX, treeY, waterX, waterY):
+    distance = math.sqrt(math.pow(treeX - waterX, 2) + (math.pow(treeY - waterY, 2)))
+    if distance < 27:
+        return True
+    else:
+        return False
+
+running = True
+while running:
+    display.fill((0, 0, 0))
+    display.blit(bg, (0, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+       
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                gunX_change = -5
+            if event.key == pygame.K_RIGHT:
+                gunX_change = 5
+            if event.key == pygame.K_SPACE:
+                if water_state is "ready":
+                    
+                    waterX = gunX
+                    fwater(waterX, waterY)
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                gunX_change = 0
+
+   
+    gunX += gunX_change
+    if gunX <= 0:
+        gunX = 0
+    elif gunX >= 736:
+        gunX = 736
+
+    
+    for i in range(num_of_trees):
+
+        if treeY[i] > 440:
+            for j in range(num_of_trees):
+                treeY[j] = 2001
+            gotext()
+            break
+
+        treeX[i] += treeX_change[i]
+        if treeX[i] <= 0:
+            treeX_change[i] = 4
+            treeY[i] += treeY_change[i]
+        elif treeX[i] >= 736:
+            treeX_change[i] = -4
+            treeY[i] += treeY_change[i]
+
+
+        contact = iscontact(treeX[i], treeY[i], waterX, waterY)
+        if contact:
+            waterY = 490
+            water_state = "ready"
+            scorevalue += 1
+            treeX[i] = random.randint(0, 726)
+            treeY[i] = random.randint(50, 160)
+
+        tree(treeX[i], treeY[i], i)
+
+    if waterY <= 0:
+        waterY = 490
+        water_state = "ready"
+
+    if water_state is "fire":
+        fwater(waterX, waterY)
+        waterY -= waterY_change
+
+    font1 = pygame.font.SysFont('Monospace.ttf', 72)
+    img1 = font1.render('YOU WIN :)', True, (210, 228, 89))
+    if scorevalue>=30:
+        display.blit(img1, (280, 350))
+        
+
+    gun(gunX, gunY)
+    showscore(textX, testY)
+    pygame.display.update()
+
