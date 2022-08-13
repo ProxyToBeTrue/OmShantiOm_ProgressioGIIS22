@@ -1,21 +1,40 @@
 Category 3 :
+#Q1)
+from cgi import print_arguments
 
-Question 1 
-Answer :
-t=int(input())
-for x in range(t):
-    n=int(input())
-    if n>0 and n<=1000:
-        print(n)
-    else:
-        print(Error)
 
-Question 2 
-Answer :
-t=int(input())
-for i in range(t):
-    x,y=map(int,raw_input().split(' '))
-    if(x>y):
-        print("A")
+t=int(input('Enter the number of test cases: '))
+if t<=1 or t>=1000:
+    print('error')
+t1 = 0
+while t1 != t:
+    x = int(input('Payment Amount: '))
+    if x>1 or x<=1000:
+        print(x%10, 'is the minimum number of coins')
+        t1 = t1+1
     else:
-        print("B")
+        print('error')
+        
+#Q2)
+t=int(input('How many test cases would you like?'))
+if t<1 or t>=1000:
+    print('error')
+t1 = 0
+while t1 != t:
+    x = int(input('Alices height: '))
+    y = int(input('Bobs height: '))
+    while x and y<100 or x and y >200 or x==y:
+        print("error")
+        break
+    else:
+        if x>y:
+            print("A")
+            t1 = t1 + 1
+        else:
+            print("B")
+            t1 = t1 + 1
+            
+            
+    
+
+        
