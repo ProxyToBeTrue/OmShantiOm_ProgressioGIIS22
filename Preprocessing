@@ -1,0 +1,11 @@
+Sypnosis cleansing / Lowering of strings / Removing of NAN Characters 
+df['clean_Sypnosis'] = df['Sypnosis'].str.lower()
+df['clean_Sypnosis'] = df['clean_Sypnosis'].apply(lambda x: re.sub('[^a-zA-Z]', ' ', x))
+df['clean_Sypnosis'] = df['clean_Sypnosis'].apply(lambda x: re.sub('\s+', ' ', x))
+df['clean_Sypnosis']
+
+Nltk library is used to create a lambda to clean the sypnosis and tokenise the string
+df['clean_Sypnosis'] = df['clean_Sypnosis'].apply(lambda x: nltk.word_tokenize(x))
+df['clean_Sypnosis']
+
+All this code has been used to preprocess the code to form a cleansed data ; further data cleanse
